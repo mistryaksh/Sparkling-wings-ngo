@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "../../layout";
+import { Footer, Navbar } from "../../layout";
 import { Link } from "react-router-dom";
 
 export const HomePage = () => {
@@ -260,7 +260,6 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-
       <div className="container w-[60%] mx-auto space-y-20 my-20">
         <h4 className="text-4xl font-semibold">
           Our Latest <span className="text-primary-500">Images</span>
@@ -450,6 +449,7 @@ export const HomePage = () => {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
