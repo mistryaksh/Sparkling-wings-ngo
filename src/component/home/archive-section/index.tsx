@@ -8,9 +8,8 @@ export const ArchiveSection = () => {
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundSize: "cover",
-        height: "50vh",
       }}
-      className="mt-20"
+      className="mt-20 px-5 py-20"
     >
       <div className="text-white flex flex-col items-center justify-center h-full ">
         <h6 className="text-3xl font-semibold">Our Achievements</h6>

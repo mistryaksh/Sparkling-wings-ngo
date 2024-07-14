@@ -19,7 +19,7 @@ export const InfoSection: FC<InfoSectionProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-12 items-center container mx-auto mt-20 gap-10">
+    <div className="grid grid-cols-12 items-center container mx-auto mt-20 gap-10 px-5">
       <div className="col-span-12 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12">
         <div className="flex flex-col gap-5 items-start">
           <h1 className="text-3xl font-semibold text-primary-800 text-capitalize">

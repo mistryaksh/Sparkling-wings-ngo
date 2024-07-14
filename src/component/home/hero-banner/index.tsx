@@ -3,7 +3,7 @@ import { AppButton } from "../../UI";
 
 export const HeroBanner: FC = () => {
   return (
-    <div className="bg-primary-800 text-white">
+    <div className="bg-primary-800 text-white xl:pb-0 pb-5">
       <div className="grid grid-cols-12 pl-10 gap-5 flex-wrap-reverse">
         <div className="col-span-12 xl:col-span-6 lg:col-span-6 md:col-span-12 sm:col-span-12 xl:py-20 xl:order-1 order-2">
           <div className="flex flex-col gap-3 justify-start items-start">

@@ -15,12 +15,12 @@ export const ProgramSection: FC<ProgramSectionProps> = ({ data }) => {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="container mx-auto mt-20">
+      <div className="container mx-auto mt-20 px-5">
         <h3 className="text-3xl text-capitalize text-primary-800 font-semibold">
           Our Programs
         </h3>
       </div>
-      <div className="my-10 container mx-auto">
+      <div className="my-10 container mx-auto px-5">
         <div className="grid grid-cols-12 gap-10">
           {data.map(({ description, image, redirectionPath, title }, i) => (
             <div
