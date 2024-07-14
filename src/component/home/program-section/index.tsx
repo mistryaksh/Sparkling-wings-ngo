@@ -21,7 +21,7 @@ export const ProgramSection: FC<ProgramSectionProps> = ({ data }) => {
         </h3>
       </div>
       <div className="my-10 container mx-auto px-5">
-        <div className="grid grid-cols-12 gap-10">
+        <div className="grid grid-cols-12 xl:gap-10 justify-center items-center w-full">
           {data.map(({ description, image, redirectionPath, title }, i) => (
             <div
               key={i}

@@ -26,7 +26,7 @@ export const Navbar = () => {
   // Array containing navigation items
 
   return (
-    <div className="bg-white flex justify-between items-center h-auto w-full px-4 xl:px-10 py-5">
+    <div className="bg-white z-50 flex justify-between items-center h-auto w-full px-4 xl:px-10 py-5">
       {/* Logo */}
       <div className="flex flex-col justify-center items-center">
         <img
@@ -116,7 +116,7 @@ export const Navbar = () => {
         className={
           nav
             ? "fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-primary-500 bg-white shadow-xl ease-in-out duration-500"
-            : "ease-in-out w-[60%]  duration-500 fixed top-0 bottom-0 left-[-100%]"
+            : "ease-in-out w-[60%]  duration-500 fixed top-0 bottom-0 left-[-100%] z-50"
         }
       >
         {/* Mobile Logo */}

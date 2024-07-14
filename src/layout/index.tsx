@@ -11,7 +11,7 @@ export const Layout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main className="relative">{children}</main>
+      <main className="relative -z-10">{children}</main>
       <Footer />
     </>
   );
