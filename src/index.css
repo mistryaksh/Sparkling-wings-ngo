@@ -1,3 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.menu-links {
+  font-size: 1.125em;
+}
+
+.menu-link-sub-menu {
+  font-size: 1em;
+}
+
+.hero-banner-headline {
+  font-size: 5em;
+  line-height: 1.2em;
+}
+
+.hero-banner-desc {
+  font-size: 1.125em;
+}
+
+.btn-text {
+  font-size: 20px;
+}

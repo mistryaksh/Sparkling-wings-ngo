@@ -1,147 +1,169 @@
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import React from "react";
+
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FiChevronDown, FiArrowRight } from "react-icons/fi";
+import {
+  AiOutlineClose,
+  AiOutlineFacebook,
+  AiOutlineInstagram,
+  AiOutlineMenu,
+  AiOutlineSearch,
+  AiOutlineWhatsApp,
+  AiOutlineYoutube,
+} from "react-icons/ai";
+import { FiChevronDown } from "react-icons/fi";
+import { navItems } from "../navigations";
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [nav, setNav] = useState(false);
+  const iconSize: number = 26;
+
+  // Toggle function to handle the navbar's display
+  const handleNav = () => {
+    setNav(!nav);
+  };
+
+  // Array containing navigation items
 
   return (
-    <nav className="flex items-center justify-between flex-wrap px-6 py-2 bg-gray-100 backdrop-blur-md fixed top-0 w-full">
-      <div className="flex items-center flex-shrink-0 text-gray-900 mr-6 lg:mr-72">
+    <div className="bg-white flex justify-between items-center h-auto w-full px-4 xl:px-10 py-5">
+      {/* Logo */}
+      <div className="flex flex-col justify-center items-center">
         <img
-          src={process.env.PUBLIC_URL + "logo.jpeg"}
-          width="10%"
-          className="rounded-full"
+          src={require("../../assets/spak-logo.png")}
+          className="border-2 border-gray-900 rounded-full w-[80%]"
           alt=""
         />
+        <h6 className="text-primary-800">Sparkling Wings</h6>
       </div>
-      <div className="block lg:hidden">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400"
-        >
-          <svg
-            className={`fill-current h-3 w-3 ${isOpen ? "hidden" : "block"}`}
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-          <svg
-            className={`fill-current h-3 w-3 ${isOpen ? "block" : "hidden"}`}
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
-          </svg>
-        </button>
+
+      <div className="hidden xl:flex xl:flex-col gap-3">
+        <div className="flex justify-between items-center gap-5">
+          <div className="flex items-center border rounded-lg p-2 gap-3 w-[50%]">
+            <AiOutlineSearch size={24} />
+            <input
+              type="search"
+              placeholder="Search"
+              className="w-full focus:outline-none"
+            />
+          </div>
+          <div>
+            <ul className="flex gap-5">
+              <li>
+                <AiOutlineFacebook size={iconSize} />
+              </li>
+              <li>
+                <AiOutlineWhatsApp size={iconSize} />
+              </li>
+              <li>
+                <AiOutlineYoutube size={iconSize} />
+              </li>
+              <li>
+                <AiOutlineInstagram size={iconSize} />
+              </li>
+            </ul>
+          </div>
+        </div>
+        {/* Desktop Navigation */}
+        <ul className=" md:flex flex flex-row gap-3 text-primary-800">
+          {navItems.map((item) => {
+            return (
+              <>
+                {item.type !== "dropdown" && (
+                  <li
+                    key={item.id}
+                    className="px-2 py-2 menu-links cursor-pointer duration-300"
+                  >
+                    {item.text}
+                  </li>
+                )}
+                {item.type === "dropdown" && (
+                  <li>
+                    <Menu>
+                      <MenuButton className="px-2 py-2  menu-links cursor-pointer duration-300 flex items-center gap-3">
+                        {item.text}
+                        <FiChevronDown className="size-4 fill-white/60" />
+                      </MenuButton>
+                      <MenuItems
+                        transition
+                        anchor="bottom end"
+                        className="bg-white shadow-xl border w-[300px] origin-top-right rounded-xl  p-1 text-sm/6 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                      >
+                        {item.content.map(({ text }, i) => (
+                          <MenuItem key={i}>
+                            <button className="group uppercase menu-link-sub-menu flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                              {text}
+                            </button>
+                          </MenuItem>
+                        ))}
+                      </MenuItems>
+                    </Menu>
+                  </li>
+                )}
+              </>
+            );
+          })}
+        </ul>
       </div>
-      <div
-        className={`w-full flex flex-col lg:flex-row lg:flex lg:items-center lg:w-auto gap-5 ${
-          isOpen ? "block" : "hidden"
-        }`}
+
+      {/* Mobile Navigation Icon */}
+      <div onClick={handleNav} className="block md:hidden">
+        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <ul
+        className={
+          nav
+            ? "fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-primary-500 bg-white shadow-xl ease-in-out duration-500"
+            : "ease-in-out w-[60%]  duration-500 fixed top-0 bottom-0 left-[-100%]"
+        }
       >
-        <Popover className="relative" data-open>
-          <PopoverButton
-            className=" text-gray-900 flex items-center gap-2 focus:outline-none"
-            data-open
-          >
-            Our Work
-            <FiChevronDown size={22} />
-          </PopoverButton>
-          <PopoverPanel
-            data-open
-            anchor="bottom"
-            className="flex flex-col w-auto bg-white p-3 rounded-md border gap-4 mt-3"
-          >
-            <div className="group cursor-pointer">
-              <Link
-                className="text-lg group-hover:text-primary-400 text-gray-900 font-bold flex items-center gap-3"
-                to="#"
+        {/* Mobile Logo */}
+        <div className="p-2">
+          <img
+            src={require("../../assets/spak-logo.png")}
+            className="border border-gray-900 rounded-full w-[40%]"
+            alt=""
+          />
+        </div>
+        {/* Mobile Navigation Items */}
+        {navItems.map((item) => (
+          <>
+            {item.type !== "dropdown" && (
+              <li
+                key={item.id}
+                className="px-2 py-2 menu-links cursor-pointer duration-300"
               >
-                For Education
-                <FiArrowRight />
-              </Link>
-              <p className="text-gray-500 font-semibold">Goals & Objective</p>
-              <p className="text-gray-400">
-                Ready about our Project Photos (teaching photos), personality
-                development, events & more
-              </p>
-            </div>
-            <div className="group cursor-pointer">
-              <Link
-                to="#"
-                className="text-lg group-hover:text-primary-400  text-gray-900 font-bold flex gap-3 items-center"
-              >
-                For Civic Volunteering
-                <FiArrowRight />
-              </Link>
-              <p className="text-gray-500 font-semibold">
-                Volunteering Up Skilling
-              </p>
-              <p className="text-gray-400">
-                Connects with UN nation goals causes
-              </p>
-            </div>
-            <div className="group cursor-pointer">
-              <Link
-                to="#"
-                className="text-lg group-hover:text-primary-400  text-gray-900 font-bold flex gap-3 items-center"
-              >
-                For Health
-                <FiArrowRight />
-              </Link>
-              <p className="text-gray-500 font-semibold">Aims</p>
-              <p className="text-gray-400">
-                Organizing Blood Camp, Health Check Ups, Awareness events & More
-                .
-              </p>
-              <p className="text-gray-400">
-                Connects with UN nation goals causes
-              </p>
-            </div>
-          </PopoverPanel>
-        </Popover>
-        <Popover className="relative" data-open>
-          <PopoverButton
-            className=" text-gray-900 flex items-center gap-2 focus:outline-none"
-            data-open
-          >
-            Get Involved
-            <FiChevronDown size={22} />
-          </PopoverButton>
-          <PopoverPanel
-            data-open
-            anchor="bottom"
-            className="flex flex-col w-[200px] bg-white p-3 rounded-md border gap-4 mt-3"
-          >
-            <Link to="#">Join Us</Link>
-            <a href="/engagement">Be a Partner</a>
-            <a href="/security">Donate</a>
-          </PopoverPanel>
-        </Popover>
-        <Popover className="relative" data-open>
-          <PopoverButton
-            className=" text-gray-900 flex items-center gap-2 focus:outline-none"
-            data-open
-          >
-            About Us <FiChevronDown size={22} />
-          </PopoverButton>
-          <PopoverPanel
-            data-open
-            anchor="bottom"
-            className="flex flex-col w-[200px] bg-white p-3 rounded-md border gap-4 mt-3"
-          >
-            <a href="/analytics">Our Vision</a>
-            <a href="/engagement">Our Mission</a>
-            <a href="/security">Meet our team</a>
-            <a href="/security">Legal & Finance</a>
-          </PopoverPanel>
-        </Popover>
-        <Link to="/">Contact Us</Link>
-      </div>
-    </nav>
+                {item.text}
+              </li>
+            )}
+            {item.type === "dropdown" && (
+              <li>
+                <Menu>
+                  <MenuButton className="px-2 py-2  menu-links cursor-pointer duration-300 flex items-center gap-3">
+                    {item.text}
+                    <FiChevronDown className="size-4 fill-white/60" />
+                  </MenuButton>
+                  <MenuItems
+                    transition
+                    anchor="bottom end"
+                    className="bg-white shadow-xl border w-[300px] origin-top-right rounded-xl  p-1 text-sm/6 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                  >
+                    {item.content.map(({ text }, i) => (
+                      <MenuItem key={i}>
+                        <button className="group uppercase menu-link-sub-menu flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                          {text}
+                        </button>
+                      </MenuItem>
+                    ))}
+                  </MenuItems>
+                </Menu>
+              </li>
+            )}
+          </>
+        ))}
+      </ul>
+    </div>
   );
 };
